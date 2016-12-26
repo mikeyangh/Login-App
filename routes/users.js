@@ -37,7 +37,9 @@ router.post('/register', function(req, res){
 	User.getUserByUsername(username, function(err, user){
 			if (err) throw err;
 		  if (user) {
-				errors = [];
+				if (!errors) {
+					errors = [];
+				}
 				errors.push({msg:"Username already exists."});
 			}
 
@@ -64,33 +66,6 @@ router.post('/register', function(req, res){
 			res.redirect('/users/login');
 			}
 	});
-	
-	
-	
-	
-//	if (errors) {
-//		res.render('register', {
-//			errors: errors
-//		});
-//	} else {
-//		var newUser = new User({
-//			name: name,
-//			email: email,
-//			username: username,
-//			password: password
-//		});
-//		
-//		
-//		User.createUser(newUser, function(err, user){
-//			if (err) throw err;
-//			console.log(user);
-//		});
-//		
-//		req.flash('success_msg', 'You are registered and can now login');
-//		
-//		res.redirect('/users/login');
-//		
-//	}
 	
 });
 
